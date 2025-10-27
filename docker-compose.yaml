@@ -1,0 +1,20 @@
+services:
+  nextcloud:
+    container_name: nextcloud-dev
+    image: ghcr.io/juliusknorr/nextcloud-dev-php83:latest
+    ports:
+      - 17210:80
+    volumes:
+      - ./:/var/www/html/apps-extra/dashvideoplayer
+      #      - ./deployment/dev/data-seed:/seeds
+      #      - ./deployment/dev/hooks:/shared/hooks/
+      - nextcloud-config:/var/www/html/config
+      - nextcloud-data:/var/www/html/data
+      - nextcloud-html:/var/www/html
+      - nextcloud-appswr:/var/www/html/apps-writable
+
+volumes:
+  nextcloud-config:
+  nextcloud-data:
+  nextcloud-html:
+  nextcloud-appswr:
