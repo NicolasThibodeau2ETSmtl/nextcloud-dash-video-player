@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OCA\Dashvideoplayer\Controller;
 
-use OCA\Dashvideoplayer\AppInfo\Application;
+use OCA\Dashvideoplayer\AppInfo\ApplicationOld;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\Attribute\FrontpageRoute;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
@@ -22,7 +22,7 @@ class PageController extends Controller {
 	#[FrontpageRoute(verb: 'GET', url: '/')]
 	public function index(): TemplateResponse {
 		return new TemplateResponse(
-			Application::APP_ID,
+			ApplicationOld::APP_ID,
 			'index',
 		);
 	}

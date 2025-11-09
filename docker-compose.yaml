@@ -4,6 +4,8 @@ services:
     image: ghcr.io/juliusknorr/nextcloud-dev-php83:latest
     ports:
       - 17210:80
+    environment:
+      SERVER_BRANCH: "v32.0.1"
     volumes:
       - ./:/var/www/html/apps-extra/dashvideoplayer
       #      - ./deployment/dev/data-seed:/seeds

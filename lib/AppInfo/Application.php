@@ -1,25 +1,72 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OCA\Dashvideoplayer\AppInfo;
 
 use OCP\AppFramework\App;
-use OCP\AppFramework\Bootstrap\IBootContext;
-use OCP\AppFramework\Bootstrap\IBootstrap;
-use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\Util;
 
-class Application extends App implements IBootstrap {
-	public const APP_ID = 'dashvideoplayer';
+use OCA\Dashvideoplayer\AppConfig;
+use OCA\Dashvideoplayer\Controller\PlayerController;
+use OCA\Dashvideoplayer\Controller\ViewerController;
 
-	/** @psalm-suppress PossiblyUnusedMethod */
-	public function __construct() {
-		parent::__construct(self::APP_ID);
-	}
+class Application extends App
+{
 
-	public function register(IRegistrationContext $context): void {
-	}
+    public $appConfig;
 
-	public function boot(IBootContext $context): void {
-	}
+    public function __construct(array $urlParams = [])
+    {
+        $appName = "dashvideoplayer";
+
+        parent::__construct($appName, $urlParams);
+
+        $this->appConfig = new AppConfig($appName);
+
+        Util::addScript($appName, "main");
+        Util::addStyle($appName, "main");
+
+
+        $container = $this->getContainer();
+
+        $container->registerService("RootStorage", function ($c) {
+            return $c->query("ServerContainer")->getRootFolder();
+        });
+
+        $container->registerService("UserSession", function ($c) {
+            return $c->query("ServerContainer")->getUserSession();
+        });
+
+        $container->registerService("Logger", function ($c) {
+            return $c->query("ServerContainer")->getLogger();
+        });
+
+        $container->registerService("PlayerController", function ($c) {
+            return new PlayerController(
+                $c->query("AppName"),
+                $c->query("Request"),
+                $c->query("RootStorage"),
+                $c->query("UserSession"),
+                $c->query("ServerContainer")->getURLGenerator(),
+                $c->query("Logger"),
+                $this->appConfig,
+                $c->query("IManager"),
+                $c->query("Session")
+            );
+        });
+
+        $container->registerService("ViewerController", function ($c) {
+            return new ViewerController(
+                $c->query("AppName"),
+                $c->query("Request"),
+                $c->query("RootStorage"),
+                $c->query("UserSession"),
+                $c->query("ServerContainer")->getURLGenerator(),
+                $c->query("Logger"),
+                $this->appConfig,
+                $c->query("IManager"),
+                $c->query("Session")
+            );
+        });
+        
+    }
 }

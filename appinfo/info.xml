@@ -13,8 +13,9 @@ Here is another line</description>
 	<category>multimedia</category>
 	<bugs>http://issues.local</bugs>
 	<dependencies>
-		<nextcloud min-version="30" max-version="32"/>
+		<nextcloud min-version="32" max-version="32"/>
 	</dependencies>
+    <!--
 	<navigations>
 		<navigation>
 			<id>dashvideoplayer</id>
@@ -24,4 +25,5 @@ Here is another line</description>
 			<type>link</type>
 		</navigation>
 	</navigations>
+	-->
 </info>
