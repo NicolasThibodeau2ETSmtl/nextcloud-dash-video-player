@@ -1,7 +1,7 @@
 services:
   nextcloud:
     container_name: nextcloud-dev
-    image: ghcr.io/juliusknorr/nextcloud-dev-php83:latest
+    image: ghcr.io/juliusknorr/nextcloud-dev-php82:latest
     ports:
       - 17210:80
     environment:
@@ -10,10 +10,17 @@ services:
       - ./:/var/www/html/apps-extra/dashvideoplayer
       #      - ./deployment/dev/data-seed:/seeds
       #      - ./deployment/dev/hooks:/shared/hooks/
-      - nextcloud-config:/var/www/html/config
-      - nextcloud-data:/var/www/html/data
+      #- nextcloud-config:/var/www/html/config
+      #- nextcloud-data:/var/www/html/data
       - nextcloud-html:/var/www/html
-      - nextcloud-appswr:/var/www/html/apps-writable
+      #- nextcloud-appswr:/var/www/html/apps-writable
+      # Binds avec filesystem
+      - T:\Temp\nc\config:/var/www/html/config
+      - T:\Temp\nc\data:/var/www/html/data
+      #- T:\Temp\nc\html:/var/www/html
+      - T:\Temp\nc\apps-wr:/var/www/html/apps-writable
+      #Binds misc
+      #- N:\ETS\VideoSamples:/var/www/html/data/admin/files/samples
 
 volumes:
   nextcloud-config:

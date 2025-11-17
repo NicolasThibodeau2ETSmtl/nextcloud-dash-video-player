@@ -1,7 +1,6 @@
 {
 	"name": "nextcloud/dashvideoplayer",
-	"description": "Here is the description
-Here is another line",
+	"description": "Reproduces mpeg-dash (mpd) video files",
 	"license": "AGPL-3.0-or-later",
 	"authors": [
 		{
@@ -32,7 +31,7 @@ Here is another line",
 	},
 	"require": {
 		"bamarni/composer-bin-plugin": "^1.8",
-		"php": "^8.1"
+		"php": "^8.2"
 	},
 	"require-dev": {
 		"nextcloud/ocp": "dev-stable30",
@@ -45,7 +44,7 @@ Here is another line",
 		"optimize-autoloader": true,
 		"sort-packages": true,
 		"platform": {
-			"php": "8.1"
+			"php": "^8.2"
 		}
 	}
 }

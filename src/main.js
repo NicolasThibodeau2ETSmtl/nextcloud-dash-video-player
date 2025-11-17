@@ -166,8 +166,8 @@
                     });
 
                     if (
-                        attr.mime == "application/mpd" ||
-                        attr.mime == "application/m3u8"
+                        attr.mime == "application/dash+xml" ||
+                        attr.mime == "application/vnd.apple.mpegurl"
                     ) {
                         fileList.fileActions.setDefault(attr.mime, "mpdOpen");
                     }
@@ -232,11 +232,7 @@ $(document).ready(function () {
         $("#filestable")
             .find("tr[data-type=file]")
             .each(function () {
-                if (
-                    ($(this).attr("data-mime") == "application/mpd" ||
-                        $(this).attr("data-mime") == "application/m3u8") &&
-                    $(this).find("div.thumbnail").length > 0
-                ) {
+                if ($(this).attr("data-mime") == "application/dash+xml" || $(this).attr("data-mime") == "application/vnd.apple.mpegurl" && $(this).find("div.thumbnail").length > 0) {
                     if ($(this).find("div.thumbnail").hasClass("icon-mpd") == false) {
                         $(this).find("div.thumbnail").addClass("icon icon-mpd");
                     }
